@@ -1,25 +1,29 @@
 import React, {Component} from 'react';
+import Posts from "./Posts/Posts";
 
 class MyComponent extends Component {
   state = {
-    counter: 0
+    posts: [],
+    loading: true
   }
-  counterUp = () => {
-    this.setState({counter: this.state.counter + 1})
+  
+  componentDidMount () {
+    fetch('http://jsonplaceholder.typicode.com/posts')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({posts: data})
+        this.setState({loading: false});
+      })
   }
-  counterDown = () => {
-    if (this.state.counter === 0) {
-      return;
-    }
-    this.setState({counter: this.state.counter - 1})
+  
+  componentDidUpdate () {
+    console.log('component was updated');
   }
   
   render () {
     return (
       <div>
-        <button onClick={this.counterUp}>Update counter up</button>
-        <h2>My counter: {this.state.counter}</h2>
-        <button onClick={this.counterDown}>Update counter down</button>
+        {this.state.loading ? <h3>Loading</h3> : <Posts data={this.state.posts}/>}
       </div>
     );
   }
