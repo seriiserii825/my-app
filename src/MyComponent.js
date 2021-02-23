@@ -4,15 +4,22 @@ class MyComponent extends Component {
   state = {
     counter: 0
   }
-  updateCounter = () => {
+  counterUp = () => {
     this.setState({counter: this.state.counter + 1})
+  }
+  counterDown = () => {
+    if (this.state.counter === 0) {
+      return;
+    }
+    this.setState({counter: this.state.counter - 1})
   }
   
   render () {
     return (
       <div>
+        <button onClick={this.counterUp}>Update counter up</button>
         <h2>My counter: {this.state.counter}</h2>
-        <button onClick={this.updateCounter}>Update counter</button>
+        <button onClick={this.counterDown}>Update counter down</button>
       </div>
     );
   }
