@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Main.module.css';
 import Movies from "../../components/Movies/Movies";
+import Search from "../../components/Search/Search";
 
 class Main extends React.Component {
   state = {
@@ -19,7 +20,10 @@ class Main extends React.Component {
     const {movies} = this.state;
     return (
       <main className={styles.main}>
-        {movies.length ? <Movies movies={movies}/> : <h4>Loading...</h4>}
+        <Search/>
+        <div className={styles.wrap}>
+          {movies.length ? <Movies movies={movies}/> : <h4>Loading...</h4>}
+        </div>
       </main>
     );
   }
