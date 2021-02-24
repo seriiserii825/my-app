@@ -4,13 +4,14 @@ import Movies from "../../components/Movies/Movies";
 import Search from "../../components/Search/Search";
 import NotFound from "../../NotFound/NotFound";
 
+const API_KEY = process.env.REACT_APP_API_KEY;
 class Main extends React.Component {
   state = {
     movies: []
   }
   
   componentDidMount () {
-    fetch('http://www.omdbapi.com/?apikey=e2b49d76&s=chip')
+    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=chip`)
       .then(res => res.json())
       .then(res => {
         this.setState({movies: res.Search})
@@ -18,9 +19,7 @@ class Main extends React.Component {
   }
   
   findMovies = (term, filter) => {
-    console.log(filter);
-    console.log(`http://www.omdbapi.com/?apikey=e2b49d76&s=${term}${filter !== 'all' ? `&type=${filter}` : ''}`);
-    fetch(`http://www.omdbapi.com/?apikey=e2b49d76&s=${term}${filter !== 'all' ? `&type=${filter}` : ''}`)
+    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${term}${filter !== 'all' ? `&type=${filter}` : ''}`)
       .then(res => res.json())
       .then(res => {
         this.setState({movies: res.Search})
@@ -29,7 +28,6 @@ class Main extends React.Component {
   
   render () {
     const {movies} = this.state;
-    console.log(movies);
     if (movies) {
       return (
         <main className={styles.main}>
