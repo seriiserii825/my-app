@@ -8,14 +8,14 @@ function Movies ({movies}) {
     <div className={styles.movies}>{movies.map(item => {
       if (item.Poster !== 'N/A') {
         return (
-          <div className={styles.item} key={item.imdbID}>
-            <Movie title={item.Title} year={item.Year} image={item.Poster}/>
+          <div className={styles.item} key={item.imdbID + Math.random() * 100}>
+            <Movie title={item.Title} year={item.Year} image={item.Poster} type={item.Type}/>
           </div>
         )
       } else {
         return (
-          <div className={styles.item} key={item.imdbID}>
-            <Movie title={item.Title} year={item.Year} image={noImage}/>
+          <div className={styles.item} key={item.imdbID + Math.random() * 100}>
+            <Movie title={item.Title} year={item.Year} image={noImage} type={item.Type}/>
           </div>
         )
       }

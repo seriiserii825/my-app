@@ -17,8 +17,10 @@ class Main extends React.Component {
       })
   }
   
-  findMovies = (term) => {
-    fetch(`http://www.omdbapi.com/?apikey=e2b49d76&s=${term}`)
+  findMovies = (term, filter) => {
+    console.log(filter);
+    console.log(`http://www.omdbapi.com/?apikey=e2b49d76&s=${term}${filter !== 'all' ? `&type=${filter}` : ''}`);
+    fetch(`http://www.omdbapi.com/?apikey=e2b49d76&s=${term}${filter !== 'all' ? `&type=${filter}` : ''}`)
       .then(res => res.json())
       .then(res => {
         this.setState({movies: res.Search})
@@ -27,10 +29,12 @@ class Main extends React.Component {
   
   render () {
     const {movies} = this.state;
+    console.log(movies);
     if (movies) {
       return (
         <main className={styles.main}>
           <Search cb={this.findMovies}/>
+          <hr/>
           <div className={styles.wrap}>
             {movies.length ? <Movies movies={movies}/> : <h4>Loading...</h4>}
           </div>
@@ -39,6 +43,8 @@ class Main extends React.Component {
     } else {
       return (
         <main className={styles.main}>
+          <Search cb={this.findMovies}/>
+          <hr/>
           <NotFound/>
         </main>
       )
