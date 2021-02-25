@@ -1,14 +1,18 @@
 import './App.css';
-import React from "react";
-import Form from "./components/Form/Form";
+import React, {useState} from "react";
+import Counter from "./components/Counter/Counter";
 
-class App extends React.Component {
-  render () {
-    return (
-      <div className="App">
-        <Form/>
-      </div>
-    );
+function App () {
+  const [isClicker, setClicker] = useState(false);
+  const toggleClicker = () => {
+    setClicker(!isClicker);
   }
+  return (
+    <div className="App">
+      <button onClick={toggleClicker}>Toggle clicker</button>
+      {isClicker ? <Counter/> : null}
+    </div>
+  );
 }
+
 export default App;
