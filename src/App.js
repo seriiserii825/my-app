@@ -1,19 +1,10 @@
 import './App.css';
-import React, {useState} from "react";
-import Timer from "./Timer/Timer";
+import React from "react";
+import {Context} from "./hooks/Context";
+import Books from "./components/Books";
 
 function App () {
-  let [isVisible, setIsVisible] = useState(false);
-  const toggleIsVisible = () => {
-    setIsVisible((prevState => !prevState))
-  }
-  console.log(isVisible);
-  return (
-    <div className="App">
-      <button onClick={toggleIsVisible}>Toggle counter</button>
-      {isVisible ? <Timer/> : null}
-    </div>
-  );
+  return <Context> <Books/> </Context>;
 }
 
 export default App;
