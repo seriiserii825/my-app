@@ -1,16 +1,17 @@
 import './App.css';
 import React, {useState} from "react";
-import Counter from "./components/Counter/Counter";
+import Timer from "./Timer/Timer";
 
 function App () {
-  const [isClicker, setClicker] = useState(false);
-  const toggleClicker = () => {
-    setClicker(!isClicker);
+  let [isVisible, setIsVisible] = useState(false);
+  const toggleIsVisible = () => {
+    setIsVisible((prevState => !prevState))
   }
+  console.log(isVisible);
   return (
     <div className="App">
-      <button onClick={toggleClicker}>Toggle clicker</button>
-      {isClicker ? <Counter/> : null}
+      <button onClick={toggleIsVisible}>Toggle counter</button>
+      {isVisible ? <Timer/> : null}
     </div>
   );
 }
